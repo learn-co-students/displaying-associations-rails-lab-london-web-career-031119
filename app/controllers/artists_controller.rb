@@ -1,4 +1,6 @@
 class ArtistsController < ApplicationController
+  before_action :get_things
+  
   def index
   end
 
@@ -20,7 +22,7 @@ class ArtistsController < ApplicationController
   end
 
   def edit
-    @artist = Artist.find(params[:id])
+
   end
 
   def update
@@ -46,5 +48,10 @@ class ArtistsController < ApplicationController
 
   def artist_params
     params.require(:artist).permit(:name)
+  end
+
+  def get_things
+    @artist = Artist.find(params[:id]) if params[:id]
+    @artists = Artist.all
   end
 end
